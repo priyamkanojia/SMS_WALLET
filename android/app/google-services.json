@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "610732540094",
+    "project_id": "sms-wallet-69aac",
+    "storage_bucket": "sms-wallet-69aac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610732540094:android:595f7c13a20f371dcc5eef",
+        "android_client_info": {
+          "package_name": "com.walletsms.selfmadesociety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610732540094-29bk49qbc72a79pv0umkl73l3b6dn4if.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.walletsms.selfmadesociety",
+            "certificate_hash": "523d9f26d514654cd4988e186e284e8e776f2160"
+          }
+        },
+        {
+          "client_id": "610732540094-ct6ua07qeufge6denhpg50eg91ds2svq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.walletsms.selfmadesociety",
+            "certificate_hash": "c20d7cec3ee806165213a5247b10924431a77df6"
+          }
+        },
+        {
+          "client_id": "610732540094-gq1003nv2dui7sjhc8433u6g3lpi45ej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.walletsms.selfmadesociety",
+            "certificate_hash": "66bfba1399befa54fd11c9ccd06a4436428e97ae"
+          }
+        },
+        {
+          "client_id": "610732540094-ia5dg6jjr6pbpbuuj10ls093l66rvkoi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.walletsms.selfmadesociety",
+            "certificate_hash": "9ce029fa0f7353417c592da27c2df481b89a328b"
+          }
+        },
+        {
+          "client_id": "610732540094-qvggidmttidfma8vdql20duqa6fjfgpq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWslgSbE6Gq3CoUIuAsJ4_OC1XtyaNABo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610732540094-qvggidmttidfma8vdql20duqa6fjfgpq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
