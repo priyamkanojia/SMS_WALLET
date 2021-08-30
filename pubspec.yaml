@@ -66,9 +66,8 @@ dependencies:
   flutter_countdown_timer: ^3.0.1
   google_sign_in:
   flutter_signin_button:
-
-
-
+  in_app_update:
+  firebase_remote_config:
 
 dev_dependencies:
   flutter_test:

@@ -33,13 +33,8 @@ import 'package:sms_wallet/Pages/Home/caregory.dart';
 import 'package:sms_wallet/Pages/Home/smshub.dart';
 import 'package:sms_wallet/google_ads.dart';
 import 'package:sms_wallet/main.dart';
-
 import '../../ad_state.dart';
 import 'HomePageClasses.dart';
-
-//var clickOnTimer = new Count_Timer();
-bool visible = true;
-var endTimer=DateTime.now() ,currentTime=DateTime.now().toString();
 
 class HomePage extends StatefulWidget {
   @override
@@ -52,22 +47,18 @@ class HomePageState extends State<HomePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String _token;
   Timer buttonIntervel;
-  var currDateTimeNow;
   var lstSmsHub,lstServices,lstCategory;
+
   @override
   void initState() {
     _saving = false;
     lstNews = HomeController.getNews();
-    getSharedPrefTimer();
-    currDateTime();
     lstSmsHub =HomeController.getSMSHub();
     lstServices = HomeController.getServices();
     lstCategory = HomeController.getCategory();
-    currDateTimeNow = Timer.periodic(Duration(seconds: 1), (timer) {currDateTime();});
-    Timer.periodic(Duration(hours: 24), (timer) {removeSharedPrefData();});
-    //removeSharedPrefData();
     super.initState();
-   
+
+
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage message) {
@@ -77,7 +68,6 @@ class HomePageState extends State<HomePage> {
     @override
     void dispose(){
       buttonIntervel.cancel();
-      currDateTimeNow.cancel();
       super.dispose();
     }
 
@@ -108,67 +98,6 @@ class HomePageState extends State<HomePage> {
   bool _saving = false;
   bool _saving2 = false;
   Future<List<News>> lstNews;
-  getSharedPrefTimer() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      endTimer = DateTime.parse(prefs.getString('ExpireTime'));
-    });
-    print('Shared Pref Timer: $endTimer');
-    return endTimer;
-  }
-  removeSharedPrefData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('ExpireTime');
-    setState(() {
-      endTimer=null;
-    });
-    return endTimer;
-  }
-
-  currDateTime(){
-    DateTime currTime = DateTime.now();
-    String dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss").format(currTime);
-    setState(() {
-      currentTime = dateFormat;
-    });
-    print(currTime);
-    //print(currDateTimeNow);
-    return currentTime;
-  }
-  /*checkTimer(){
-    if(endTimer == null){
-      setState(() {
-        visible = true;
-      });
-    }
-    if(currentTime.toString() == endTimer.toString()){
-      print('Current Date if: $currentTime');
-      print('End Timer if: $endTimer');
-      setState(() {
-        visible = true;
-        removeSharedPrefData();
-      }
-      );
-    }
-    if(endTimer == null){
-      print(endTimer);
-      setState(() {
-        visible=true;
-      });
-    }
-
-    else if (currentTime.toString() != endTimer.toString() ){
-      print('End Timer: $endTimer');
-      print('Cur Time:$currentTime');
-      setState(() {
-        visible = true;
-      });
-    }
-    else{
-      //removeSharedPrefData();
-    }
-  }*/
-
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +172,8 @@ class HomePageState extends State<HomePage> {
                                 color: Colors.white,
                               ),
                             ),
-                            FutureBuilder<List<Sliders>>(            ///Top Slider
+                            ///Top Slider
+                            FutureBuilder<List<Sliders>>(
                                 future: HomeController.getSliders(),
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
@@ -314,6 +244,7 @@ class HomePageState extends State<HomePage> {
                                             return SizedBox();
                                         },
                                       ),
+                            ///SERVICES
                             FutureBuilder<List<ServicesClass>>(
                                 future: lstServices,
                                 builder: (context,snapshot){
@@ -355,7 +286,7 @@ class HomePageState extends State<HomePage> {
 
                             ),
 
-                            ///BANNER SLIDER
+                            ///BANNER SLIDER 2
                             FutureBuilder<List<BannerSliders>>(            ///Banner Slider
                                 future: HomeController.getBanner(),
                                 builder: (context, snapshot) {

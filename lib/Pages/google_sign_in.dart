@@ -4,7 +4,7 @@ import 'dart:convert' show json;
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+/*
 GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
   //clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
@@ -144,10 +144,12 @@ class SignInDemoState extends State<SignInDemo> {
         ));
   }
 }
-/*
+*/
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sms_wallet/Models/MyColors.dart';
+import 'package:sms_wallet/Pages/LoginPage.dart';
 class GoogleSignInProvider extends ChangeNotifier{
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount _user ;
@@ -168,12 +170,65 @@ class GoogleSignInProvider extends ChangeNotifier{
     }catch(e){
       print(e.toString());
     }
-
-
     notifyListeners();
   }
   Future logout() async{
     await googleSignIn.disconnect();
     FirebaseAuth.instance.signOut();
   }
-}*/
+}
+
+class GoogleDemoScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Object>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState ==ConnectionState.waiting){
+          return Center(child: CircularProgressIndicator());
+        }
+        else if(snapshot.hasData){
+          return GoogleHomeScreen();
+        }
+        else if(snapshot.hasError){
+          return Center(child: Text('Something Went Wrong !'));
+        }
+        else{
+          return LoginWidget();
+        }
+      }
+    );
+  }
+}
+class GoogleHomeScreen extends StatelessWidget {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final user = FirebaseAuth.instance.currentUser;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('SMS Google Sign In'),
+        centerTitle: true,
+        actions: [
+          TextButton(onPressed: (){}, child: Text('Logout'))
+        ],
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        color: MyColors.darkBlue,
+        child: Column(
+          children: [
+            Text('Profile'),
+            SizedBox(height: 20.0,),
+            CircleAvatar(
+              radius: 40.0,
+              backgroundImage: NetworkImage(user.photoURL),
+            ),
+            SizedBox(height: 8.0,),
+
+          ],
+        ),
+      ),
+    );
+  }
+}

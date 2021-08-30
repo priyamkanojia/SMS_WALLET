@@ -598,9 +598,9 @@ LoginController.login(
                             SignInButton(
                               Buttons.GoogleDark,
                               onPressed:(){
-                                // final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
-                                // provider.googleLogin();
-                               Navigator.push(context,MaterialPageRoute(builder: (Context)=>SignInDemo())) ;
+                                final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+                                provider.googleLogin();
+                               //Navigator.push(context,MaterialPageRoute(builder: (Context)=>SignInDemo())) ;
                                 //_showButtonPressDialog(context, 'Google (dark)');
                               },
                               text: 'Sign up with Google',

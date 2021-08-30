@@ -13,6 +13,7 @@ import 'package:sms_wallet/Pages/google_sign_in.dart';
 import 'package:sms_wallet/Pages/splashScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:sms_wallet/Pages/update.dart';
 import 'package:sms_wallet/ad_state.dart';
 import 'package:sms_wallet/google_ads.dart';
 import 'package:sms_wallet/interstitialAd.dart';
@@ -93,25 +94,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print(id.toString());
     print ('api token: $api_token');
-    return MaterialApp(
+    return ChangeNotifierProvider(
+      create:(context) => GoogleSignInProvider(),
+      child: MaterialApp(
         title: 'SMS Wallet',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Poppins',
           primarySwatch: Colors.grey,
         ),
-        home: //CountDownTimer(),
+        home: //UpdateApp(),
         SplashScreen(id: id, api_token: api_token, intro:intro),
+      )
     );
-    // return MaterialApp(
-    //   title: 'SMS Wallet',
-    //   debugShowCheckedModeBanner: false,
-    //   theme: ThemeData(
-    //     fontFamily: 'Poppins',
-    //     primarySwatch: Colors.grey,
-    //   ),
-    //    home: //CountDownTimer(),
-    //   SplashScreen(id: id, api_token: api_token, intro:intro),
-    // );
   }
 }
