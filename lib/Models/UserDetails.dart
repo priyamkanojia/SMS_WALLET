@@ -150,8 +150,6 @@ static List<Widget> lstProfileStatus=[];
     updatedAt = json['updated_at'];
     task = json['task'];
         user_badge = json['user_badge'];
-
-    
   }
 
   Map<String, dynamic> toJson() {
@@ -185,4 +183,34 @@ static List<Widget> lstProfileStatus=[];
     data['intrest'] = interest;
     return data;
   }
+}
+
+class KycDetails{
+ static String user_id;
+ static String document_number;
+ static String front;
+ static String back;
+ static String message;
+ static String id_type;
+
+ KycDetails({user_id,document_number,front,back,message,id_type});
+
+ KycDetails.fromJson(Map<String, dynamic> json){
+  user_id= json['user_id'];
+  document_number= json['document_number'];
+  front = json['front'];
+  back = json['back'];
+  message = json['message'];
+  id_type = json['id_type'];
+ }
+ Map<String, dynamic> toJson(){
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  data['user_id'] = user_id;
+  data['document_number']=document_number;
+  data['front']=front;
+  data['back']=back;
+  data['message']=message;
+  data['id_type']=id_type;
+  return data;
+ }
 }

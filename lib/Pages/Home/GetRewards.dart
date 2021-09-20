@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-
+double reward = 0.0000100;
 class GetRewardsData extends StatefulWidget {
   @override
   _GetRewardsDataState createState() => _GetRewardsDataState();
@@ -28,6 +28,7 @@ class _GetRewardsDataState extends State<GetRewardsData> {
       //wallet_reward
       setState((){
         walletRewards = jsonDecode(response.body)['wallet_reward'];
+        reward = double.parse(walletRewards);
         //print(walletRewards);
       });
     }

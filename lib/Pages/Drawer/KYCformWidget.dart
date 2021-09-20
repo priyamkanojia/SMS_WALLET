@@ -28,11 +28,17 @@ final FocusNode myFocusNode = FocusNode();
 
 class KYCformWidgetState extends State<KYCformWidget> {
   void initState() {
-    idNumberController.clear();
-    idTypeController.clear();
+    //idNumberController.clear();
+    //idTypeController.clear();
     defaultIdType = "Adhar";
     file=null;
     super.initState();
+    if (KycDetails.document_number != null) {
+       idNumberController.text = KycDetails.document_number ;
+    }
+    if (KycDetails.id_type!= null) {
+      idTypeController.text = KycDetails.id_type;
+    }
   }
 
   bool load = true;

@@ -49,7 +49,7 @@ showAlertDialogAppUpdate(BuildContext context, String type) {
     ),
     onTap: () {
       StoreRedirect.redirect(
-          androidAppId: "com.dishaInno.bada_bhalu", iOSAppId: "585027354");
+          androidAppId: "com.walletsms.selfmadesociety");
       if (type != "force") {
         Navigator.of(context).pop();
       }
@@ -331,4 +331,41 @@ class _HomeNavigationBarState extends State<HomeNavigationBarWidget> {
         ) ??
         false;
   }
+
+  Future<bool> _forceUpdate(){
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'New Update',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            decoration: BoxDecoration(
+              // color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(5)),
+            height: 100,
+            child: Text(
+              "Your KYC Is Not Complete, Please Complete KYC For Better Experience.",
+            )),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KYCformWidget()));
+            },
+            child: Text('Continue', style: TextStyle(fontWeight: FontWeight.bold, color:Colors.blue[700])),
+          ),
+        ],
+      ),
+    ) ??
+        false;
+  }
+
+
 }

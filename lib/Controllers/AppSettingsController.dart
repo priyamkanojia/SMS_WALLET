@@ -114,7 +114,9 @@ abstract class AppSettingsController {
       };
       res = await http.post(Uri.parse(Urls.base_url + "kyc_update"),
           headers: {"api-token": UserDetails.apiToken}, body: jsonEncode(data));
-      
+      if (res.statusCode == 200) {
+        KycDetails.fromJson(jsonDecode(utf8.decode(res.bodyBytes)));
+      }
     } catch (e) {
       print(e.toString());
     }

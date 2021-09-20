@@ -123,8 +123,6 @@ abstract class LoginController {
         "address": UserDetails.address,
         'intrest':UserDetails.interest,
         "password": password,
-
-
       };
       res = await http.post(Uri.parse(Urls.base_url + "user_profile"),
           headers: {"api-token": UserDetails.apiToken}, body: jsonEncode(data));

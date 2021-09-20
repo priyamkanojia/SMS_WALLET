@@ -12,6 +12,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sms_wallet/Models/MyColors.dart';
+import 'package:sms_wallet/Pages/Home/GetRewards.dart';
+double rewardPerSec = 0.0000016;
+
 DateTime endTimeSharedPref =DateTime.now() ;
 /*class Count_Timer {
   String timer_status = null ;
@@ -182,7 +185,7 @@ class _TriggerTimerState extends State<TriggerTimer> {
 
     if (month < expmonth || day <= expday || year < expyear) {
       if (hr > exphr || (day >= expday && hr == exphr && min > expmin) ||
-          (hr == exphr && min == expmin && sec > expsec)) {
+          (hr == exphr && min == expmin && sec > expsec) || expmonth < month || expyear < year ) {
         print(
             'curr : $day+$hr+$min+$sec , Exp: $expday+$exphr+$expmin+$expsec');
         print("trigger");
@@ -195,9 +198,15 @@ class _TriggerTimerState extends State<TriggerTimer> {
       // }
       else {
         print("not trigger");
+        //removeSharedPrefData();
         print(
             'curr : $day+$hr+$min+$sec , Exp: $expday+$exphr+$expmin+$expsec');
+
       }
+    }
+    else{
+      removeSharedPrefData();
+      endTimeSharedPref = DateTime.now();
     }
   }
 
@@ -228,6 +237,7 @@ class _TriggerTimerState extends State<TriggerTimer> {
 }
 
 class CountDownTimer extends StatefulWidget {
+
   @override
   _CountDownTimerState createState() => _CountDownTimerState();
 }
@@ -245,6 +255,7 @@ class _CountDownTimerState extends State<CountDownTimer> with TickerProviderStat
   void initState(){
     getSharedPrefTimer();
     timerDifference();
+    //rewardPreSecFunc();
     super.initState();
     timerString;
     controller = AnimationController(
@@ -279,6 +290,7 @@ class _CountDownTimerState extends State<CountDownTimer> with TickerProviderStat
     else{
       setState(() {
         timeDiff = endTimeSharedPref.difference(DateTime.now());
+        //RewardPreSec();
       });
     print('ElseTimeDiff');
     print('TimeDiff: $timeDiff');
@@ -296,6 +308,59 @@ class _CountDownTimerState extends State<CountDownTimer> with TickerProviderStat
                 timerString,
               );
             })
+    );
+  }
+}
+
+class RewardPreSec extends StatefulWidget {
+  @override
+  _RewardPreSecState createState() => _RewardPreSecState();
+}
+
+class _RewardPreSecState extends State<RewardPreSec> with TickerProviderStateMixin{
+  AnimationController controller;
+  rewardPreSecFunc(){
+    rewardPerSec = (reward + 0.0000016);
+    return rewardPerSec;
+  }
+  String get rewardpersecString {
+    //Duration duration = Duration(seconds: 1);
+    Timer.periodic(Duration (seconds: 1), (timer) {rewardPreSecFunc();});
+    return rewardPreSecFunc().toStringAsPrecision(8);
+  }
+
+  void counterOnTap(){
+    print('on tap');
+    if (controller.isAnimating){
+      //timerDifference();
+      //controller.stop();
+    }
+    else {
+      //controller.reverse(from: controller.value == 0.0 ? 1.0 : controller.value);
+    }
+  }
+
+  void initState(){
+    rewardPreSecFunc();
+    super.initState();
+    counterOnTap();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    Timer.periodic(Duration (seconds: 1), (timer) {rewardPreSecFunc();});
+    }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AnimatedBuilder(
+          animation: controller,
+          builder: (context, child) {
+            return Text(
+                rewardpersecString,
+            );
+          }),
     );
   }
 }

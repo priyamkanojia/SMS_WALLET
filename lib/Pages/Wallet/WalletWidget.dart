@@ -116,6 +116,16 @@ class WalletWidgetState extends State<WalletWidget> {
                         ],
                       ),
                     ),
+                    /*Padding(
+                      padding: const EdgeInsets.fromLTRB(5.0,2.0,5.0,2.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Reward Per Sec: '),
+                          RewardPreSec(),
+                        ],
+                      ),
+                    ),*/
                   ],
                 ),
               ),

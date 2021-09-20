@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sms_wallet/Pages/Drawer/getKycDetail.dart';
 import 'package:sms_wallet/Pages/Home/GetRewards.dart';
 import 'package:sms_wallet/Pages/faq.dart';
 import 'package:sms_wallet/Pages/google_sign_in.dart';
@@ -103,7 +104,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Poppins',
           primarySwatch: Colors.grey,
         ),
-        home: //UpdateApp(),
+        home: //GetKycDetails(),
         SplashScreen(id: id, api_token: api_token, intro:intro),
       )
     );
